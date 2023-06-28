@@ -25,28 +25,28 @@ const data = {
   estado: 'MT',
 };
 export default function Home() {
-  React.useEffect(async () => {
+  React.useEffect(() => {
     axios
-      .post('/user', {
-        firstName: 'Fred',
-        lastName: 'Flintstone',
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
-    await axios
-      .get('https://anfibro.org/api/pessoa')
+      .get('/api')
+      .then((res) => console.log(res))
+      .catch((error) => console.log(error));
+    //axios.get(url).then((res) => console.log(res)).catch((err) => console.log(err));
+    //axios.post(url, data).then((res) => console.log(res)).catch((err) => console.log(err));
+  }, []);
+  const api = (url) => {
+    return axios(url, {
+      method: 'GET',
+      mode: 'no-cors',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      },
+      withCredentials: true,
+      credentials: 'same-origin',
+    })
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
-    await axios
-      .post('https://anfibro.org/api/pessoa', data)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
-  });
+  };
 
   return (
     <div className={styles.container}>
