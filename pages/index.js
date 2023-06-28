@@ -1,7 +1,53 @@
+import React from 'react';
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
+import axios from 'axios';
 
+const data = {
+  nome: 'Carlos',
+  data_nascimento: '1960-02-10',
+  cpf: '111.111.111-11',
+  telefone: '(11) 11111-1111',
+  genero: 'M',
+  celular: null,
+  escolaridade: 'S',
+  cep: '78048225',
+  endereco: null,
+  numero: '100',
+  complemento: null,
+  bairro: 'Jardim Bom Clima',
+  cidade: 'Cuiabá',
+  foto: null,
+  comprovante: null,
+  senha: 'pjbwMLrz',
+  email: 'cleybson@gmail.com',
+  rua: 'Rua das Brisas',
+  estado: 'MT',
+};
 export default function Home() {
+  React.useEffect(async () => {
+    axios
+      .post('/user', {
+        firstName: 'Fred',
+        lastName: 'Flintstone',
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+    await axios
+      .get('https://anfibro.org/api/pessoa')
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+    await axios
+      .post('https://anfibro.org/api/pessoa', data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  });
+
   return (
     <div className={styles.container}>
       <Head>
